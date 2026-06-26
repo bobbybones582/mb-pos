@@ -53,7 +53,7 @@
             30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
             40%, 60% { transform: translate3d(4px, 0, 0); }
         }
-        .shake {
+        .login-box.shake {
             animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
         }
 
@@ -160,35 +160,26 @@
 </head>
 <body class="flex h-screen overflow-hidden select-none">
 
-    <!-- Left Panel (80% width) -->
     <main class="w-4/5 bg-gray-900 text-white h-full flex flex-col relative">
         
-        <div class="flex-grow flex">
-            <!-- Main POS Content Area (70% of the wrapper) -->
+        <div class="flex-grow flex h-[calc(100%-2.5rem)]"> 
             <div class="w-[70%] h-full flex flex-col relative border-r border-gray-800">
-                 <!-- Dimmer for this section -->
                  <div id="main-content-dimmer" class="login-ui-element absolute inset-0 bg-black bg-opacity-60 z-10"></div>
                  
                  <div class="h-full flex flex-col overflow-hidden">
                      <div class="h-[70%] border-b-2 border-white flex flex-col overflow-hidden">
-                        <!-- Blue Banner (Top 12%) -->
                         <div id="blue-banner" class="h-[12%] bg-blue-600 flex-shrink-0 flex items-center justify-center text-white font-mono text-6xl font-bold">
-                            <!-- Number input appears here -->
-                        </div>
-                        <!-- Yellow Banner (Next 8%) -->
+                            </div>
                         <div id="yellow-banner" class="h-[8%] bg-yellow-400 flex-shrink-0 flex items-center justify-center text-black font-semibold text-center px-4 animate-none">
                             WELCOME TO MARKET BASKET
                         </div>
                         
-                        <!-- Dynamic Checkout Item List / PLU Catalog Container (Remaining 80%) -->
                         <div id="item-list-area" class="h-[80%] py-2 px-0 overflow-y-auto bg-white flex flex-col">
-                            <!-- Injected dynamically: standard checkout list OR the PLU Catalog Grid -->
                             <p id="item-list-placeholder" class="text-gray-400 italic text-center mt-4 w-full">Items will be listed here</p>
                         </div>
                      </div>
                      
                      <div class="h-[30%] flex flex-shrink-0">
-                        <!-- Left side of totals (45%) -->
                         <div class="w-[45%] p-4 flex flex-col justify-center space-y-1 bg-gray-950">
                             <div class="flex justify-between text-gray-400">
                                 <span>Subtotal:</span>
@@ -203,7 +194,6 @@
                                 <span id="summary-total" class="font-mono text-green-400">$0.00</span>
                             </div>
                         </div>
-                        <!-- Right side of totals (55%) -->
                         <div class="w-[55%] p-4 border-l-2 border-white flex items-center justify-center bg-gray-950">
                             <div class="text-center">
                                 <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Scale Weight</p>
@@ -214,11 +204,9 @@
                  </div>
             </div>
 
-            <!-- Secondary Content Area (30% of the wrapper) -->
             <div id="action-zone" class="w-[30%] h-full border-l-2 border-white flex flex-col relative bg-gray-900">
-                <!-- Login Box Overlay -->
                 <div id="login-box-container" class="login-ui-element absolute inset-0 bg-gray-800 bg-opacity-95 z-20 p-4 flex items-center justify-center">
-                    <div id="login-box" class="bg-white text-black p-8 rounded-lg shadow-2xl w-full">
+                    <div id="login-box" class="bg-white text-black p-8 rounded-lg shadow-2xl w-full max-w-sm login-box">
                         <h2 class="text-3xl font-bold text-center mb-2">POS Login</h2>
                         <p id="login-error" class="text-red-500 text-center font-semibold h-6 mb-2"></p>
                         <div class="space-y-4">
@@ -229,7 +217,6 @@
                     </div>
                 </div>
 
-                <!-- Main Buttons Grid -->
                 <div id="main-buttons-panel" class="flex flex-col h-full bg-gray-900">
                     <div class="h-2/5 border-b-2 border-white">
                          <div class="h-full w-full grid grid-cols-3 grid-rows-3">
@@ -253,8 +240,6 @@
                     </div>
                 </div>
 
-                <!-- Action Panels -->
-                <!-- Transaction Menu Panel -->
                 <div id="trans-menu-panel" class="action-panel">
                     <h3 class="action-panel-title">Transaction Menu</h3>
                     <button class="action-panel-button bg-yellow-500 hover:bg-yellow-600 text-black mb-2" onclick="initiateSuspend()">Suspend Transaction</button>
@@ -262,7 +247,6 @@
                     <button class="action-panel-button bg-gray-500 hover:bg-gray-600 mt-auto" onclick="showMainButtons()">Back</button>
                 </div>
 
-                <!-- Supervisor Menu Panel -->
                 <div id="supv-menu-panel" class="action-panel">
                     <h3 class="action-panel-title">Supervisor Menu</h3>
                     <button class="action-panel-button bg-[#ff7a22] hover:bg-[#e56819] mb-2" onclick="showVoidAuthorization()">Void Item</button>
@@ -273,7 +257,6 @@
                     <button class="action-panel-button bg-gray-500 hover:bg-gray-600 mt-auto" onclick="showMainButtons()">Back</button>
                 </div>
 
-                <!-- Coupon Menu Panel -->
                 <div id="coupon-menu-panel" class="action-panel">
                     <h3 class="action-panel-title">Coupon Menu</h3>
                     <button class="action-panel-button bg-green-500 hover:bg-green-600 mb-2" onclick="applyCoupon('Food Coupon')">Food Coupon</button>
@@ -282,7 +265,6 @@
                     <button class="action-panel-button bg-gray-500 hover:bg-gray-600 mt-auto" onclick="showMainButtons()">Back</button>
                 </div>
 
-                <!-- PLU Lookup Panel -->
                 <div id="plu-lookup-panel" class="action-panel">
                     <h3 class="action-panel-title">PLU Catalog</h3>
                     <p class="text-center text-xs text-gray-300 px-2 py-1 mb-2 bg-gray-900 rounded border border-gray-700">Type PLU / Name or click on any catalog item on the left to add.</p>
@@ -290,7 +272,6 @@
                     <button class="action-panel-button bg-gray-500 hover:bg-gray-600 mt-auto" onclick="showMainButtons()">Back</button>
                 </div>
 
-                <!-- Void Menu Panel (Unlocked after override) -->
                 <div id="void-menu-panel" class="action-panel">
                     <h3 class="action-panel-title text-red-400 text-2xl font-bold mb-4">Void Menu</h3>
                     <button class="action-panel-button bg-[#ff7a22] hover:bg-[#e56819] text-white font-bold py-4 rounded mb-2 text-xl" onclick="performVoidItem()">Void Item</button>
@@ -299,7 +280,6 @@
                     <button class="action-panel-button bg-gray-500 hover:bg-gray-600 mt-auto" onclick="showMainButtons()">Back</button>
                 </div>
 
-                <!-- Payment Menu Panel -->
                 <div id="payment-menu-panel" class="action-panel">
                     <h3 class="action-panel-title text-green-400">Payment Menu</h3>
                     <div id="payment-options-group" class="flex flex-col gap-2">
@@ -317,21 +297,19 @@
             </div>
         </div>
 
-        <footer class="w-full h-12 bg-black flex-shrink-0 flex items-center justify-between px-6 z-10">
-            <div class="flex items-center gap-3 w-1/3">
-                <div id="status-box" class="px-3 py-1 rounded-md text-center font-semibold text-sm"></div>
-                <div class="flex items-center gap-2">
-                    <span class="text-sm text-gray-400">Items:</span>
-                    <div id="cart-item-count-box" class="px-2 py-0.5 bg-gray-700 rounded-md text-sm font-mono font-bold"></div>
-                </div>
+        <footer class="h-10 w-full bg-black text-white border-t border-gray-800 font-mono text-sm px-4 select-none flex justify-between items-center z-40">
+            <div class="flex items-center gap-6">
+                <div>CASHIER: <span id="footerCashierNum">0001</span></div>
+                <div>DRAWER: <span id="footerDrawerStatus" class="font-bold text-red-500">CLOSED</span></div>
+                <div>PREV TOTAL: $<span id="footerPrevTotal" class="font-bold">0.00</span></div>
             </div>
-            <div id="cashier-info" class="w-1/3 text-center font-semibold text-gray-300"></div>
-            <div id="date-time-container" class="w-1/3 font-mono text-base text-gray-400 text-right"></div>
+            
+            <div class="flex items-center gap-6">
+                <div>STR: 0019</div>
+                <div id="clockDisplay" class="font-bold">00/00/0000 00:00:00 AM</div>
+            </div>
         </footer>
 
-        <!-- Custom Absolute Modals centered on Left Screen -->
-
-        <!-- Sign Out Modal -->
         <div id="sign-out-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-60 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-8 rounded-lg shadow-2xl w-full max-w-md text-center">
                 <h2 class="text-3xl font-bold mb-6">Sign Out Panel</h2>
@@ -344,7 +322,6 @@
             </div>
         </div>
 
-        <!-- Manager Screen 1 Modal: Swipe Request (Matches image_9167c3.png exactly) -->
         <div id="manager-swipe-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-75 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-8 rounded-2xl shadow-2xl w-[500px] text-center max-w-lg mx-auto transform scale-100 transition-all">
                 <h2 class="text-3xl font-extrabold text-black mb-3">Authorization Required</h2>
@@ -358,7 +335,6 @@
             </div>
         </div>
 
-        <!-- Manager Screen 2 Modal: 2nd Factor Override (Matches image_9167e3.png exactly) -->
         <div id="manager-auth-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-75 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-8 rounded-2xl shadow-2xl w-[500px] text-center max-w-lg mx-auto">
                 <h2 class="text-3xl font-extrabold text-black mb-6">2nd Factor Override</h2>
@@ -376,7 +352,6 @@
             </div>
         </div>
 
-        <!-- Suspend Modal Prompt -->
         <div id="suspend-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-75 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-6 rounded-2xl shadow-2xl w-96 text-center">
                 <h3 class="text-2xl font-bold mb-4">Suspend Order</h3>
@@ -388,7 +363,6 @@
             </div>
         </div>
 
-        <!-- Resume Modal Prompt -->
         <div id="resume-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-75 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-6 rounded-2xl shadow-2xl w-[450px] flex flex-col h-[400px]">
                 <h3 class="text-2xl font-bold mb-4 text-center">Suspended Transactions</h3>
@@ -399,7 +373,6 @@
             </div>
         </div>
 
-        <!-- Tax Exempt Modal Prompt -->
         <div id="tax-exempt-modal" class="login-ui-element absolute inset-0 bg-black bg-opacity-75 z-30 flex items-center justify-center">
             <div class="bg-white text-black p-6 rounded-2xl shadow-2xl w-96 text-center">
                 <h3 class="text-2xl font-bold mb-2">Tax Exempt ID</h3>
@@ -413,9 +386,7 @@
         </div>
     </main>
 
-    <!-- Right Panel (20% width) -->
-    <aside class="w-1/5 bg-white h-full p-4 flex flex-col gap-6 justify-between text-gray-800 relative">
-        <!-- Payment Keypad -->
+    <aside class="w-1/5 bg-white h-full p-4 flex flex-col gap-6 justify-between text-gray-800 relative pb-12">
         <div>
             <div class="grid grid-cols-3 gap-3" id="right-keypad-grid">
                 <button class="payment-keypad-btn" data-key="1">1</button>
@@ -433,15 +404,12 @@
             </div>
         </div>
 
-        <!-- Staff Card Reader -->
         <div id="card-reader" class="w-full h-20 bg-gray-700 rounded-lg p-3 flex flex-col justify-between shadow-inner">
             <div class="text-center text-white font-semibold text-xs tracking-wider">STAFF CARD READER</div>
             <div id="card-reader-slot" class="h-2 w-full bg-black rounded-full shadow-inner border border-gray-900"></div>
         </div>
 
-        <!-- Staff Card Wrapper -->
         <div class="relative w-full h-24 flex items-end justify-end">
-            <!-- Staff Card (Scaled to 60%) -->
             <div id="staff-card" class="absolute bottom-0 right-0 cursor-grab active:cursor-grabbing" style="transform: scale(0.6); transform-origin: bottom right;">
                 <div class="w-56 h-32 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col p-2 hover:border-blue-500 transition-colors">
                     <div class="h-7 bg-blue-800 rounded-t-lg flex items-center justify-between px-2">
@@ -463,7 +431,6 @@
         </div>
     </aside>
 
-    <!-- Firebase SDK Imports -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
@@ -499,22 +466,24 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             // --- Credentials & State ---
-            const ADMIN_USER_ID = '0910336'; // Cashier ID
-            const ADMIN_PASSWORD = '091'; // Cashier Password
-            const ADMIN_NAME = 'Nathaniel F'; // Cashier Name
+            const ADMIN_USER_ID = '0910336'; 
+            const ADMIN_PASSWORD = '091'; 
+            const ADMIN_NAME = 'Nathaniel F'; 
 
-            const MANAGER_USER_ID = '0910800'; // Otter ID
-            const MANAGER_PASSWORD = 'otter800'; // Otter Password
+            const MANAGER_USER_ID = '0910800'; 
+            const MANAGER_PASSWORD = 'otter800'; 
 
             let cart = [];
             let globalInput = '';
             let isLoggedIn = false;
-            let currentView = 'checkout'; // checkout or catalog
+            let currentView = 'checkout'; 
             let isWaitingForManagerCard = false;
-            let selectedItemIndex = -1; // Index of the currently selected checkout item
+            let selectedItemIndex = -1; 
             let isTaxExempt = false;
             let currentPaymentTimer = null;
-            let pendingVerifCallback = null; // Holds onSuccess action for staff verif flow
+            let pendingVerifCallback = null; 
+            let savedPrevTotal = 0.00; 
+            let localSuspendedList = []; // Local array fallback container for saving operations
 
             // --- PLU Catalog Data ---
             const pluCatalog = [
@@ -534,10 +503,10 @@
 
             // --- Element References ---
             const allElements = {
-                dateTimeContainer: document.getElementById('date-time-container'),
-                statusBox: document.getElementById('status-box'),
-                cartItemCountBox: document.getElementById('cart-item-count-box'),
-                cashierInfo: document.getElementById('cashier-info'),
+                clockDisplay: document.getElementById('clockDisplay'),
+                footerDrawerStatus: document.getElementById('footerDrawerStatus'),
+                footerPrevTotal: document.getElementById('footerPrevTotal'),
+                footerCashierNum: document.getElementById('footerCashierNum'),
                 mainContentDimmer: document.getElementById('main-content-dimmer'),
                 loginBoxContainer: document.getElementById('login-box-container'),
                 loginBox: document.getElementById('login-box'),
@@ -603,7 +572,7 @@
                 isLoggedIn = false;
                 allElements.mainContentDimmer.classList.add('active');
                 allElements.loginBoxContainer.classList.add('active');
-                allElements.cashierInfo.textContent = 'Not Logged In';
+                if (allElements.footerCashierNum) allElements.footerCashierNum.textContent = 'NONE';
                 allElements.userIdInput.value = '';
                 allElements.passwordInput.value = '';
                 allElements.userIdInput.focus();
@@ -616,7 +585,7 @@
                 isLoggedIn = true;
                 allElements.mainContentDimmer.classList.remove('active');
                 allElements.loginBoxContainer.classList.remove('active');
-                allElements.cashierInfo.textContent = `${ADMIN_USER_ID} - ${ADMIN_NAME}`;
+                if (allElements.footerCashierNum) allElements.footerCashierNum.textContent = ADMIN_USER_ID;
             }
 
             function attemptLogin() {
@@ -664,7 +633,7 @@
                 allElements.mainButtonsPanel.style.display = 'none';
                 panel.classList.add('active');
             }
-            
+
             function clearGlobalInput() {
                 globalInput = '';
                 updateBlueBanner();
@@ -672,7 +641,7 @@
                     renderCatalog();
                 }
             }
-            
+
             function updateBlueBanner() {
                 allElements.blueBanner.textContent = globalInput;
             }
@@ -681,7 +650,7 @@
             function renderCatalog() {
                 const searchStr = globalInput.trim().toLowerCase();
                 let filtered = pluCatalog;
-
+                
                 if (searchStr) {
                     allElements.yellowBanner.textContent = `CATALOG SEARCH FILTER: "${globalInput}"`;
                     filtered = pluCatalog.filter(item => 
@@ -691,7 +660,6 @@
                 } else {
                     allElements.yellowBanner.textContent = "PLU LOOKUP: TYPE CODE TO SEARCH OR CLICK TO ADD";
                 }
-
                 allElements.yellowBanner.className = "h-[8%] bg-yellow-400 flex items-center justify-center text-black font-semibold text-center px-4";
 
                 if (filtered.length === 0) {
@@ -722,19 +690,11 @@
                 allElements.itemListArea.innerHTML = catalogGridHtml;
             }
 
-            // Add Catalog Item to transaction (Always pushed as separate item to support duplicates)
             window.addCatalogItemToCart = function(pluCode) {
                 const item = pluCatalog.find(i => i.plu === pluCode);
                 if (item) {
-                    cart.push({
-                        name: item.name,
-                        price: item.price,
-                        plu: item.plu,
-                        quantity: 1
-                    });
-                    
+                    cart.push({ name: item.name, price: item.price, plu: item.plu, quantity: 1 });
                     selectedItemIndex = cart.length - 1;
-
                     if (currentView === 'catalog') {
                         allElements.yellowBanner.textContent = `ADDED: ${item.name.toUpperCase()} ($${item.price.toFixed(2)})`;
                         setTimeout(() => {
@@ -753,133 +713,216 @@
                     allElements.yellowBanner.className = "h-[8%] bg-red-500 text-white flex items-center justify-center font-semibold text-center px-4";
                     return;
                 }
-                const price = -(amount / 100); 
-                cart.push({
-                    name: couponType,
-                    price: price,
-                    quantity: 1,
-                    plu: 'COUPON'
-                });
-                
+                const price = -(amount / 100);
+                cart.push({ name: `${couponType} Coupon`, price: price, plu: 'COUP', quantity: 1 });
                 selectedItemIndex = cart.length - 1;
-
-                renderCart();
                 clearGlobalInput();
-                allElements.yellowBanner.textContent = `COUPON APPLIED: ${couponType.toUpperCase()} ${price.toFixed(2)}`;
+                renderCart();
+                allElements.yellowBanner.textContent = `APPLIED ${couponType.toUpperCase()}: -$${Math.abs(price).toFixed(2)}`;
                 allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
             };
 
-            // Selected Item Index Trigger
+            // --- Calculations & Render ---
+            function calculateTotals() {
+                let subtotal = 0;
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+                });
+                const taxRate = isTaxExempt ? 0.00 : 0.05;
+                const tax = subtotal > 0 ? subtotal * taxRate : 0;
+                const total = subtotal + tax;
+
+                return { subtotal, tax, total };
+            }
+
+            function renderCart() {
+                if (currentView !== 'checkout') return;
+
+                const totals = calculateTotals();
+                allElements.summarySubtotal.textContent = `$${totals.subtotal.toFixed(2)}`;
+                allElements.summaryTax.textContent = `$${totals.tax.toFixed(2)}`;
+                allElements.summaryTotal.textContent = `$${totals.total.toFixed(2)}`;
+
+                if (cart.length === 0) {
+                    allElements.itemListArea.innerHTML = '<p id="item-list-placeholder" class="text-gray-400 italic text-center mt-4 w-full">Items will be listed here</p>';
+                    return;
+                }
+
+                allElements.itemListArea.innerHTML = `
+                    <div class="flex flex-col w-full text-black font-mono text-xl select-none">
+                        ${cart.map((item, idx) => {
+                            const isSelected = idx === selectedItemIndex;
+                            const displayPrice = (item.price * item.quantity).toFixed(2);
+                            return `
+                                <div onclick="window.selectCartItem(${idx})" class="flex justify-between px-6 py-2 border-b border-gray-100 cursor-pointer ${isSelected ? 'bg-blue-100 font-bold border-l-4 border-blue-600' : 'hover:bg-gray-50'}">
+                                    <div class="flex flex-col">
+                                        <span>${item.name}</span>
+                                        <span class="text-xs text-gray-500 font-sans">PLU: ${item.plu} ${item.quantity > 1 ? `(${item.quantity} @ $${item.price.toFixed(2)})` : ''}</span>
+                                    </div>
+                                    <span class="${item.price < 0 ? 'text-green-600' : 'text-black'}">${item.price < 0 ? '-' : ''}$${Math.abs(displayPrice).toFixed(2)}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+                
+                allElements.itemListArea.scrollTop = allElements.itemListArea.scrollHeight;
+            }
+
             window.selectCartItem = function(index) {
                 selectedItemIndex = index;
                 renderCart();
             };
 
-            // Renders standard checkout view - styled in light theme with compact edge-to-edge layout
-            function renderCart() {
-                if (currentView === 'catalog') return; 
-
-                const itemsHtml = cart.map((item, index) => {
-                    const isSelected = selectedItemIndex === index;
-                    const rowBgClass = isSelected ? 'bg-blue-600 text-white' : 'hover:bg-gray-100 text-black';
-                    const priceTextClass = item.price < 0 
-                        ? (isSelected ? 'text-red-200 font-bold' : 'text-red-600 font-bold') 
-                        : (isSelected ? 'text-white' : 'text-gray-950');
-
-                    return `
-                        <div onclick="selectCartItem(${index})" class="flex justify-between items-center py-1.5 px-4 border-b border-gray-200 cursor-pointer ${rowBgClass} transition-colors duration-75">
-                            <span class="tracking-wide font-semibold text-[11px] uppercase">${item.name}</span>
-                            <span class="font-mono font-bold text-[12px] ${priceTextClass}">
-                                $${item.price.toFixed(2)}
-                            </span>
-                        </div>
-                    `;
-                }).join('');
-                
-                allElements.itemListArea.innerHTML = itemsHtml;
-                if (cart.length === 0) {
-                     allElements.itemListArea.innerHTML = '<p id="item-list-placeholder" class="text-gray-400 italic text-center mt-4 w-full">Items will be listed here</p>';
+            // --- Payment System Blocks ---
+            window.processCashPayment = function() {
+                const totals = calculateTotals();
+                if (totals.total <= 0) {
+                    alert("Cart total must be greater than $0.00 to tender cash.");
+                    return;
                 }
                 
-                calculateTotals();
-                updateBannerStatus();
+                savedPrevTotal = totals.total;
+                if (allElements.footerPrevTotal) {
+                    allElements.footerPrevTotal.textContent = savedPrevTotal.toFixed(2);
+                }
+
+                alert(`Transaction Cashed Out!\nTotal: $${totals.total.toFixed(2)}\nOpening drawer!`);
                 
-                // Auto scroll to bottom
-                allElements.itemListArea.scrollTop = allElements.itemListArea.scrollHeight;
-            }
-
-            function calculateTotals() {
-                // EXCLUDE negative coupon adjustments and bottle refunds from taxable subtotal computation to fix user's coupon math bug.
-                const taxableSubtotal = cart
-                    .filter(item => item.price > 0 && item.plu !== 'COUPON')
-                    .reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                    
-                const nonTaxableSubtotal = cart
-                    .filter(item => item.price <= 0 || item.plu === 'COUPON')
-                    .reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-                const roundedTaxable = Math.round(taxableSubtotal * 100) / 100;
-                const roundedNonTaxable = Math.round(nonTaxableSubtotal * 100) / 100;
-
-                const subtotal = Math.round((roundedTaxable + roundedNonTaxable) * 100) / 100;
-                const tax = isTaxExempt ? 0 : Math.round(Math.max(0, roundedTaxable * 0.05) * 100) / 100;
-                const total = Math.round((subtotal + tax) * 100) / 100;
-
-                allElements.summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
-                allElements.summaryTax.textContent = `$${tax.toFixed(2)}`;
-                allElements.summaryTotal.textContent = `$${total.toFixed(2)}`;
-            }
-
-            // --- Banner Updates ---
-            function updateBannerStatus() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                if (totalItems === 0) {
-                    allElements.statusBox.textContent = 'Ready';
-                    allElements.statusBox.className = 'px-3 py-1 rounded-md text-center font-semibold text-sm bg-green-600 text-white';
-                    allElements.cartItemCountBox.textContent = '0';
-                } else {
-                    allElements.statusBox.textContent = 'Transaction';
-                    allElements.statusBox.className = 'px-3 py-1 rounded-md text-center font-semibold text-sm bg-yellow-500 text-black';
-                    allElements.cartItemCountBox.textContent = totalItems;
+                if (allElements.footerDrawerStatus) {
+                    allElements.footerDrawerStatus.textContent = "OPEN";
+                    allElements.footerDrawerStatus.classList.remove('text-red-500');
+                    allElements.footerDrawerStatus.classList.add('text-green-500');
+                    setTimeout(() => {
+                        allElements.footerDrawerStatus.textContent = "CLOSED";
+                        allElements.footerDrawerStatus.classList.remove('text-green-500');
+                        allElements.footerDrawerStatus.classList.add('text-red-500');
+                    }, 4000);
                 }
-            }
 
-            function updateDateTime() {
-                const now = new Date();
-                const dateOptions = { month: '2-digit', day: '2-digit', year: '2-digit' };
-                const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-                allElements.dateTimeContainer.textContent = `${now.toLocaleDateString('en-US', dateOptions)} ${now.toLocaleTimeString('en-US', timeOptions)}`;
-            }
-
-            // --- Key Input Handler ---
-            function handleNumberInput(key) {
-                if (key === 'C') {
-                    globalInput = '';
-                } else if (key === 'B' || key === 'Backspace') {
-                    globalInput = globalInput.slice(0, -1);
-                } else {
-                    if (globalInput.length < 10) {
-                         globalInput += key;
-                    }
-                }
-                updateBlueBanner();
-                if (currentView === 'catalog') {
-                    renderCatalog();
-                }
-            }
-
-            // --- Unified Supervisor Verification sequence (Staff Verif) ---
-            window.runStaffVerifSequence = function(onSuccess) {
-                pendingVerifCallback = onSuccess;
-                allElements.managerSwipeModal.classList.add('active');
-                allElements.cardReaderSlot.className = "h-2 w-full bg-blue-600 rounded-full shadow-inner border border-gray-900 reader-glow-blue";
-                isWaitingForManagerCard = true;
+                cart = [];
+                selectedItemIndex = -1;
+                isTaxExempt = false;
+                showMainButtons();
             };
 
-            window.showVoidAuthorization = function() {
-                runStaffVerifSequence(() => {
+            window.processCardPayment = function(type) {
+                const totals = calculateTotals();
+                if (totals.total <= 0) {
+                    alert("Cart total must be greater than $0.00 to run card.");
+                    return;
+                }
+
+                allElements.paymentOptionsGroup.classList.add('hidden');
+                allElements.paymentStatusGroup.classList.remove('hidden');
+                allElements.paymentBackBtn.classList.add('hidden');
+                
+                allElements.paymentTerminalMsg.textContent = "INSERT / SWIPE CARD...";
+                allElements.cardReaderSlot.className = "h-2 w-full bg-blue-500 rounded-full reader-glow-blue border border-blue-400";
+
+                currentPaymentTimer = setTimeout(() => {
+                    allElements.paymentTerminalMsg.textContent = "PROCESSING...";
+                    allElements.cardReaderSlot.className = "h-2 w-full bg-yellow-500 rounded-full border border-yellow-400 animate-pulse";
+                    
+                    currentPaymentTimer = setTimeout(() => {
+                        allElements.paymentTerminalMsg.textContent = "APPROVED! REMOVE";
+                        allElements.cardReaderSlot.className = "h-2 w-full bg-green-500 reader-glow-green rounded-full border border-green-400";
+                        
+                        savedPrevTotal = totals.total;
+                        if (allElements.footerPrevTotal) allElements.footerPrevTotal.textContent = savedPrevTotal.toFixed(2);
+
+                        currentPaymentTimer = setTimeout(() => {
+                            cart = [];
+                            selectedItemIndex = -1;
+                            isTaxExempt = false;
+                            showMainButtons();
+                        }, 1500);
+                    }, 2000);
+                }, 2500);
+            };
+
+            window.processCheckPayment = function() {
+                const totals = calculateTotals();
+                if (totals.total <= 0) return;
+                
+                savedPrevTotal = totals.total;
+                if (allElements.footerPrevTotal) allElements.footerPrevTotal.textContent = savedPrevTotal.toFixed(2);
+                
+                alert(`Check Accepted for $${totals.total.toFixed(2)}. Endorsing check item.`);
+                cart = [];
+                selectedItemIndex = -1;
+                isTaxExempt = false;
+                showMainButtons();
+            };
+
+            window.cancelPaymentGate = function() {
+                clearTimeout(currentPaymentTimer);
+                allElements.paymentOptionsGroup.classList.remove('hidden');
+                allElements.paymentStatusGroup.classList.add('hidden');
+                allElements.paymentBackBtn.classList.remove('hidden');
+                allElements.cardReaderSlot.className = "h-2 w-full bg-black rounded-full shadow-inner border border-gray-900";
+            };
+
+            // --- Keypad Mechanics ---
+            function handleKeypadStroke(key) {
+                if (!isLoggedIn && key !== 'C') return;
+
+                if (key === 'C') {
+                    clearGlobalInput();
+                } else if (key === 'B') {
+                    if (globalInput.length > 0) {
+                        globalInput = globalInput.slice(0, -1);
+                        updateBlueBanner();
+                        if (currentView === 'catalog') renderCatalog();
+                    }
+                } else {
+                    if (globalInput.length < 10) {
+                        globalInput += key;
+                        updateBlueBanner();
+                        if (currentView === 'catalog') renderCatalog();
+                    }
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (!isLoggedIn) {
+                    if (e.key === 'Enter') attemptLogin();
+                    return;
+                }
+                if (e.target.tagName === 'INPUT') return; 
+
+                if (e.key >= '0' && e.key <= '9') {
+                    handleKeypadStroke(e.key);
+                } else if (e.key === 'Backend' || e.key === 'Backspace') {
+                    handleKeypadStroke('B');
+                } else if (e.key === 'Escape' || e.key.toLowerCase() === 'c') {
+                    handleKeypadStroke('C');
+                } else if (e.key === 'Enter') {
+                    if (currentView === 'checkout') {
+                        window.performPLUSD();
+                    }
+                }
+            });
+
+            allElements.rightKeypadGrid.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const key = btn.getAttribute('data-key');
+                    handleKeypadStroke(key);
+                });
+            });
+
+            // --- Supervisor Authentication Workflow ---
+            window.showVoidAuthorization = function(successCallback) {
+                if (cart.length === 0) {
+                    alert("There are no transaction items present to void.");
+                    return;
+                }
+                pendingVerifCallback = successCallback || (() => {
                     showActionPanel(allElements.voidMenuPanel);
                 });
+                isWaitingForManagerCard = true;
+                allElements.managerSwipeModal.classList.add('active');
+                allElements.cardReaderSlot.className = "h-2 w-full bg-blue-500 rounded-full reader-glow-blue border border-blue-400";
             };
 
             window.closeVoidAuthorization = function() {
@@ -888,137 +931,134 @@
                 allElements.cardReaderSlot.className = "h-2 w-full bg-black rounded-full shadow-inner border border-gray-900";
                 isWaitingForManagerCard = false;
                 pendingVerifCallback = null;
-                showMainButtons();
             };
 
-            // Programmatic Auto Swipe Animation (Fallback trigger)
-            window.triggerCardSwipe = function() {
-                if (!isWaitingForManagerCard) {
-                    allElements.yellowBanner.textContent = "PLEASE INITIATE A SUPERVISOR OVERRIDE ACTION FIRST.";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-400 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
+            let isDraggingCard = false;
+            let dragStartX = 0, dragStartY = 0;
+            let cardTransformX = 0, cardTransformY = 0;
+
+            allElements.staffCard.addEventListener('pointerdown', (e) => {
+                isDraggingCard = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                allElements.staffCard.setPointerCapture(e.pointerId);
+                allElements.staffCard.classList.remove('returning');
+                allElements.staffCard.classList.add('dragging');
+            });
+
+            allElements.staffCard.addEventListener('pointermove', (e) => {
+                if (!isDraggingCard) return;
+                const deltaX = e.clientX - dragStartX;
+                const deltaY = e.clientY - dragStartY;
+                const currentX = cardTransformX + deltaX;
+                const currentY = cardTransformY + deltaY;
+                
+                allElements.staffCard.style.transform = `scale(0.6) translate(${currentX}px, ${currentY}px)`;
+                
+                if (isWaitingForManagerCard) {
+                    const readerRect = allElements.cardReader.getBoundingClientRect();
+                    const cardRect = allElements.staffCard.getBoundingClientRect();
+                    
+                    if (
+                        cardRect.left < readerRect.right &&
+                        cardRect.right > readerRect.left &&
+                        cardRect.top < readerRect.bottom &&
+                        cardRect.bottom > readerRect.top
+                    ) {
+                        isDraggingCard = false;
+                        allElements.staffCard.releasePointerCapture(e.pointerId);
+                        resetStaffCardPos();
+                        triggerSwipeSuccess();
+                    }
                 }
-                
-                allElements.staffCard.classList.add('card-swipe');
-                
-                setTimeout(() => {
-                    allElements.cardReaderSlot.className = "h-2 w-full rounded-full shadow-inner border border-gray-900 reader-glow-green";
-                }, 400);
+            });
 
-                setTimeout(() => {
-                    allElements.staffCard.classList.remove('card-swipe');
-                    handleSwipeSuccess();
-                }, 1200);
-            };
+            function resetStaffCardPos() {
+                isDraggingCard = false;
+                cardTransformX = 0;
+                cardTransformY = 0;
+                allElements.staffCard.classList.remove('dragging');
+                allElements.staffCard.classList.add('returning');
+                allElements.staffCard.style.transform = 'scale(0.6) translate(0px, 0px)';
+            }
 
-            function handleSwipeSuccess() {
+            allElements.staffCard.addEventListener('pointerup', resetStaffCardPos);
+            allElements.staffCard.addEventListener('pointercancel', resetStaffCardPos);
+
+            function triggerSwipeSuccess() {
                 allElements.managerSwipeModal.classList.remove('active');
+                allElements.managerAuthModal.classList.add('active');
                 allElements.managerIdInput.value = '';
                 allElements.managerPasswordInput.value = '';
                 allElements.managerError.textContent = '';
-                allElements.managerAuthModal.classList.add('active');
                 allElements.managerIdInput.focus();
             }
 
-            function attemptManagerLogin() {
-                const enteredID = allElements.managerIdInput.value.trim();
-                const enteredPW = allElements.managerPasswordInput.value.trim();
-
-                if (enteredID === MANAGER_USER_ID && enteredPW === MANAGER_PASSWORD) {
+            allElements.managerLoginBtn.addEventListener('click', () => {
+                if (allElements.managerIdInput.value === MANAGER_USER_ID && allElements.managerPasswordInput.value === MANAGER_PASSWORD) {
                     allElements.managerAuthModal.classList.remove('active');
                     allElements.cardReaderSlot.className = "h-2 w-full bg-black rounded-full shadow-inner border border-gray-900";
                     isWaitingForManagerCard = false;
                     
                     if (pendingVerifCallback) {
-                        const callback = pendingVerifCallback;
+                        pendingVerifCallback();
                         pendingVerifCallback = null;
-                        callback();
                     }
                 } else {
-                    allElements.managerError.textContent = 'Invalid Manager credentials.';
-                    allElements.managerIdInput.select();
+                    allElements.managerError.textContent = "Invalid Credentials for 2nd Factor Override";
                 }
-            }
+            });
 
-            // --- Supervisor Menu Action Flow implementations ---
-            window.triggerTaxExemptFlow = function() {
-                runStaffVerifSequence(() => {
-                    allElements.taxExemptError.textContent = '';
-                    allElements.taxExemptIdInput.value = '';
-                    allElements.taxExemptModal.classList.add('active');
-                    allElements.taxExemptIdInput.focus();
-                });
-            };
-
-            window.confirmTaxExempt = function() {
-                const exemptId = allElements.taxExemptIdInput.value.trim();
-                if (exemptId === '5232024' || exemptId === '3172011') {
-                    isTaxExempt = true;
-                    allElements.taxExemptModal.classList.remove('active');
-                    calculateTotals();
-                    allElements.yellowBanner.textContent = "TAX EXEMPT STATUS APPROVED - APPLIED";
-                    allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
+            // --- Void Actions ---
+            window.performVoidItem = function() {
+                if (selectedItemIndex >= 0 && selectedItemIndex < cart.length) {
+                    const item = cart[selectedItemIndex];
+                    alert(`Voiding Item: ${item.name}`);
+                    cart.splice(selectedItemIndex, 1);
+                    selectedItemIndex = cart.length - 1;
+                    renderCart();
+                    showMainButtons();
                 } else {
-                    allElements.taxExemptError.textContent = 'Invalid Tax Exempt ID.';
+                    alert("Please click and highlight a specific item line on the left list row first.");
                 }
             };
 
-            window.cancelTaxExempt = function() {
-                allElements.taxExemptModal.classList.remove('active');
+            window.performVoidOrder = function() {
+                if (confirm("Are you absolutely sure you want to completely VOID this entire order?")) {
+                    cart = [];
+                    selectedItemIndex = -1;
+                    isTaxExempt = false;
+                    renderCart();
+                    showMainButtons();
+                }
+            };
+
+            window.performVoidQuantity = function() {
+                if (selectedItemIndex < 0 || selectedItemIndex >= cart.length) {
+                    alert("Highlight an item line first.");
+                    return;
+                }
+                const amt = parseInt(globalInput, 10);
+                if (!amt || amt <= 0) {
+                    alert("Type new target reduced quantity value on keypad first.");
+                    return;
+                }
+                const item = cart[selectedItemIndex];
+                if (amt >= item.quantity) {
+                    cart.splice(selectedItemIndex, 1);
+                } else {
+                    item.quantity -= amt;
+                }
+                selectedItemIndex = cart.length - 1;
+                clearGlobalInput();
+                renderCart();
                 showMainButtons();
             };
 
-            window.triggerManualEntryFlow = function() {
-                const amount = parseInt(globalInput, 10);
-                if (!amount || amount <= 0) {
-                    allElements.yellowBanner.textContent = "TYPE THE MANUAL ENTRY PRICE IN THE BLUE BANNER FIRST";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-                runStaffVerifSequence(() => {
-                    const price = amount / 100;
-                    cart.push({
-                        name: "MANUAL ENTRY",
-                        price: price,
-                        quantity: 1,
-                        plu: 'MANUAL'
-                    });
-                    selectedItemIndex = cart.length - 1;
-                    renderCart();
-                    clearGlobalInput();
-                    allElements.yellowBanner.textContent = "MANUAL ENTRY ADDED";
-                    allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                });
-            };
-
-            window.triggerEbtFlow = function() {
-                const amount = parseInt(globalInput, 10);
-                if (!amount || amount <= 0) {
-                    allElements.yellowBanner.textContent = "TYPE THE EBT ENTRY AMOUNT FIRST";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-                runStaffVerifSequence(() => {
-                    const price = -(amount / 100);
-                    cart.push({
-                        name: "EBT ENTRY",
-                        price: price,
-                        quantity: 1,
-                        plu: 'EBT'
-                    });
-                    selectedItemIndex = cart.length - 1;
-                    renderCart();
-                    clearGlobalInput();
-                    allElements.yellowBanner.textContent = "EBT ENTRY DEDUCTED";
-                    allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                });
-            };
-
-            // --- Transaction Suspend & Resume Logic (Cloud backed) ---
+            // --- Suspend & Resume Logic Systems ---
             window.initiateSuspend = function() {
                 if (cart.length === 0) {
-                    allElements.yellowBanner.textContent = "TRANSACTION EMPTY - CANNOT SUSPEND";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
+                    alert("Cart is empty! Nothing to suspend.");
                     return;
                 }
                 allElements.suspendNameInput.value = '';
@@ -1026,585 +1066,189 @@
                 allElements.suspendNameInput.focus();
             };
 
+            window.cancelSuspend = function() { 
+                allElements.suspendModal.classList.remove('active'); 
+            };
+
             window.confirmSuspend = async function() {
-                const custName = allElements.suspendNameInput.value.trim() || 'Suspended Order';
+                const name = allElements.suspendNameInput.value.trim() || 'Guest';
                 allElements.suspendModal.classList.remove('active');
 
                 if (db) {
                     try {
-                        allElements.yellowBanner.textContent = "SUSPENDING TRANSACTION TO THE CLOUD...";
-                        // Save order state
-                        await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'suspended_transactions'), {
-                            name: custName,
-                            cart: JSON.stringify(cart),
+                        allElements.yellowBanner.textContent = "SUSPENDING TRANSACTION TO FIREBASE...";
+                        await addDoc(collection(db, `${appId}_suspended`), {
+                            customerName: name,
+                            cart: cart,
                             isTaxExempt: isTaxExempt,
                             timestamp: Date.now()
                         });
                         cart = [];
                         selectedItemIndex = -1;
                         isTaxExempt = false;
-                        allElements.yellowBanner.textContent = `TRANSACTION SUSPENDED: "${custName.toUpperCase()}"`;
-                        allElements.yellowBanner.className = "h-[8%] bg-blue-600 text-white flex items-center justify-center font-semibold text-center px-4";
                         renderCart();
                         showMainButtons();
                     } catch (e) {
-                        console.error("Suspend error: ", e);
-                        allElements.yellowBanner.textContent = "SUSPEND ERROR: FAILED TO CONNECT TO LOCAL SERVICES";
-                        allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
+                        console.error("Firestore Suspend Error:", e);
+                        localBackupSuspend(name);
                     }
                 } else {
-                    // Local fallback
-                    allElements.yellowBanner.textContent = "SUSPEND ERROR: OFFLINE SYSTEM";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-500 text-white flex items-center justify-center font-semibold text-center px-4";
+                    localBackupSuspend(name);
                 }
             };
 
-            window.cancelSuspend = function() {
-                allElements.suspendModal.classList.remove('active');
-            };
-
-            window.initiateResumeList = async function() {
-                if (cart.length > 0) {
-                    allElements.yellowBanner.textContent = "CLEAR THE CURRENT ACTIVE ORDER BEFORE RESUMING";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-                allElements.resumeListContainer.innerHTML = '<p class="text-gray-400 italic text-center py-8">Fetching list...</p>';
-                allElements.resumeModal.classList.add('active');
-
-                if (db) {
-                    try {
-                        const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'suspended_transactions'));
-                        const docs = [];
-                        querySnapshot.forEach(doc => {
-                            docs.push({ id: doc.id, ...doc.data() });
-                        });
-
-                        if (docs.length === 0) {
-                            allElements.resumeListContainer.innerHTML = '<p class="text-gray-500 italic text-center py-8">No suspended orders found.</p>';
-                            return;
-                        }
-
-                        allElements.resumeListContainer.innerHTML = docs.map(doc => {
-                            const date = new Date(doc.timestamp).toLocaleTimeString();
-                            return `
-                                <div onclick="resumeTransaction('${doc.id}')" class="flex justify-between items-center p-3 bg-gray-100 hover:bg-blue-100 border border-gray-300 rounded-lg cursor-pointer transition-colors">
-                                    <div class="text-left">
-                                        <p class="font-bold text-black uppercase">${doc.name}</p>
-                                        <p class="text-xs text-gray-500">${date}</p>
-                                    </div>
-                                    <span class="text-xs bg-blue-600 text-white font-bold py-1 px-2.5 rounded-full uppercase">Load</span>
-                                </div>
-                            `;
-                        }).join('');
-                    } catch (e) {
-                        console.error(e);
-                        allElements.resumeListContainer.innerHTML = '<p class="text-red-500 text-center py-8">Failed to contact retrieval service.</p>';
-                    }
-                } else {
-                    allElements.resumeListContainer.innerHTML = '<p class="text-gray-400 italic text-center py-8">Offline system setup. Firestore required.</p>';
-                }
-            };
-
-            window.resumeTransaction = async function(id) {
-                allElements.resumeModal.classList.remove('active');
-                if (db) {
-                    try {
-                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'suspended_transactions', id);
-                        const docSnap = await getDoc(docRef);
-                        if (docSnap.exists()) {
-                            const data = docSnap.data();
-                            cart = JSON.parse(data.cart);
-                            isTaxExempt = !!data.isTaxExempt;
-                            selectedItemIndex = cart.length - 1;
-                            
-                            // Delete from cloud after resuming to prevent multi-retrieval
-                            await deleteDoc(docRef);
-                            
-                            renderCart();
-                            showMainButtons();
-                            allElements.yellowBanner.textContent = `RESUMED ORDER: "${data.name.toUpperCase()}"`;
-                            allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                        }
-                    } catch (e) {
-                        console.error(e);
-                    }
-                }
-            };
-
-            window.cancelResume = function() {
-                allElements.resumeModal.classList.remove('active');
-            };
-
-            // --- Payment Menu Workflows ---
-            allElements.btnPaymentMenu.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    allElements.yellowBanner.textContent = "CHECKOUT CART IS EMPTY - NO TOTAL TO PAY";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-                showActionPanel(allElements.paymentMenuPanel);
-                allElements.paymentOptionsGroup.classList.remove('hidden');
-                allElements.paymentStatusGroup.classList.add('hidden');
-                allElements.paymentBackBtn.classList.remove('hidden');
-            });
-
-            // Credit/Debit Card terminal flow
-            window.processCardPayment = function(cardType) {
-                allElements.paymentOptionsGroup.classList.add('hidden');
-                allElements.paymentBackBtn.classList.add('hidden');
-                allElements.paymentStatusGroup.classList.remove('hidden');
-                
-                allElements.paymentTerminalMsg.textContent = "WAITING FOR CUSTOMER...";
-                allElements.blueBanner.textContent = "WAITING...";
-                allElements.blueBanner.className = "h-[12%] bg-blue-600 flex items-center justify-center text-white font-mono text-3xl font-bold tracking-widest animate-pulse";
-
-                // Generate random checkout timer 6 - 12 seconds
-                const delay = (Math.floor(Math.random() * 7) + 6) * 1000;
-                
-                currentPaymentTimer = setTimeout(() => {
-                    const success = Math.random() < 0.85; // 85% success chance
-                    
-                    if (success) {
-                        completeOrder(cardType + " CARD");
-                    } else {
-                        // Card read failed
-                        allElements.yellowBanner.textContent = "CARD READ RETRY - PLEASE TRY AGAIN";
-                        allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4 animate-bounce";
-                        
-                        allElements.paymentOptionsGroup.classList.remove('hidden');
-                        allElements.paymentBackBtn.classList.remove('hidden');
-                        allElements.paymentStatusGroup.classList.add('hidden');
-                        updateBlueBanner();
-                        allElements.blueBanner.className = "h-[12%] bg-blue-600 flex items-center justify-center text-white font-mono text-6xl font-bold";
-                    }
-                }, delay);
-            };
-
-            window.cancelPaymentGate = function() {
-                if (currentPaymentTimer) {
-                    clearTimeout(currentPaymentTimer);
-                    currentPaymentTimer = null;
-                }
-                allElements.paymentOptionsGroup.classList.remove('hidden');
-                allElements.paymentBackBtn.classList.remove('hidden');
-                allElements.paymentStatusGroup.classList.add('hidden');
-                allElements.blueBanner.className = "h-[12%] bg-blue-600 flex items-center justify-center text-white font-mono text-6xl font-bold";
-                updateBlueBanner();
-                allElements.yellowBanner.textContent = "WELCOME TO MARKET BASKET";
-                allElements.yellowBanner.className = "h-[8%] bg-yellow-400 flex items-center justify-center text-black font-semibold text-center px-4";
-            };
-
-            // Cash Drawer payments
-            window.processCashPayment = function() {
-                const totalText = allElements.summaryTotal.textContent.replace('$', '');
-                const orderTotal = parseFloat(totalText);
-                
-                const cashAmountCents = parseInt(globalInput, 10);
-                if (!cashAmountCents || cashAmountCents <= 0) {
-                    allElements.yellowBanner.textContent = "TYPE THE CASH RECEIVED IN CENTS ON KEYBOARD FIRST";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-
-                const cashReceived = cashAmountCents / 100;
-                if (cashReceived < orderTotal) {
-                    allElements.yellowBanner.textContent = `INSUFFICIENT CASH (RECEIVED: $${cashReceived.toFixed(2)})`;
-                    allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-
-                const change = cashReceived - orderTotal;
-                allElements.blueBanner.textContent = `CHANGE: $${change.toFixed(2)}`;
-                allElements.yellowBanner.textContent = `CASH TENDERED: $${cashReceived.toFixed(2)} | CHANGE OUT: $${change.toFixed(2)}`;
-                allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
-
-                // Setup Change Paid Gate
-                allElements.paymentOptionsGroup.innerHTML = `
-                    <button class="action-panel-button bg-green-500 text-white font-bold h-24" onclick="confirmChangePaid()">CHANGE PAID</button>
-                `;
-                allElements.paymentBackBtn.classList.add('hidden');
-            };
-
-            window.confirmChangePaid = function() {
-                // Restore Payment buttons
-                allElements.paymentOptionsGroup.innerHTML = `
-                    <button class="action-panel-button bg-blue-600 hover:bg-blue-700" onclick="processCardPayment('CREDIT')">Credit Card</button>
-                    <button class="action-panel-button bg-indigo-600 hover:bg-indigo-700" onclick="processCardPayment('DEBIT')">Debit Card</button>
-                    <button class="action-panel-button bg-emerald-600 hover:bg-emerald-700 text-white" onclick="processCashPayment()">Cash</button>
-                    <button class="action-panel-button bg-amber-600 hover:bg-amber-700" onclick="processCheckPayment()">Check</button>
-                `;
-                
-                // Clear order session
+            function localBackupSuspend(name) {
+                localSuspendedList.push({ 
+                    id: Math.random().toString(36).substr(2, 9), 
+                    customerName: name, 
+                    cart: [...cart], 
+                    isTaxExempt: isTaxExempt 
+                });
                 cart = [];
-                isTaxExempt = false;
                 selectedItemIndex = -1;
+                isTaxExempt = false;
                 renderCart();
                 showMainButtons();
-            };
-
-            // Check payments
-            window.processCheckPayment = function() {
-                completeOrder("CHECK");
-                setTimeout(() => {
-                    cart = [];
-                    isTaxExempt = false;
-                    selectedItemIndex = -1;
-                    renderCart();
-                    showMainButtons();
-                }, 2000);
-            };
-
-            function completeOrder(payMethod) {
-                const totalText = allElements.summaryTotal.textContent.replace('$', '');
-                const orderTotal = parseFloat(totalText);
-
-                // Append payment line
-                cart.push({
-                    name: `${payMethod} PAID`,
-                    price: -orderTotal,
-                    quantity: 1,
-                    plu: 'PAYMENT'
-                });
-                
-                renderCart();
-                clearGlobalInput();
-                allElements.blueBanner.className = "h-[12%] bg-blue-600 flex items-center justify-center text-white font-mono text-6xl font-bold";
-                
-                allElements.yellowBanner.textContent = "ORDER PAID - THANK YOU!";
-                allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-bold text-center px-4 uppercase tracking-wider";
-                
-                // Payment Gate Finish screen
-                allElements.paymentOptionsGroup.classList.remove('hidden');
-                allElements.paymentStatusGroup.classList.add('hidden');
-                allElements.paymentBackBtn.classList.add('hidden');
-                
-                allElements.paymentOptionsGroup.innerHTML = `
-                    <button class="action-panel-button bg-green-600 hover:bg-green-700 text-white text-xl py-6" onclick="confirmChangePaid()">NEW ORDER</button>
-                `;
+                allElements.yellowBanner.textContent = "ORDER SUSPENDED LOCALLY";
+                allElements.yellowBanner.className = "h-[8%] bg-yellow-400 text-black flex items-center justify-center font-semibold text-center px-4";
             }
 
-            // --- Void Functions (Selective Active Item Voids) ---
-            window.performVoidItem = function() {
-                if (cart.length > 0 && selectedItemIndex >= 0 && selectedItemIndex < cart.length) {
-                    const voided = cart[selectedItemIndex];
-                    cart.splice(selectedItemIndex, 1);
-                    
-                    selectedItemIndex = cart.length > 0 ? cart.length - 1 : -1;
-                    
-                    allElements.yellowBanner.textContent = `VOID ITEM SUCCESS: removed ${voided.name.toUpperCase()}`;
-                    allElements.yellowBanner.className = "h-[8%] bg-orange-500 text-white flex items-center justify-center font-semibold text-center px-4";
-                    renderCart();
-                } else {
-                    allElements.yellowBanner.textContent = "VOID ITEM FAIL: Please click to select an item to void first.";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                }
-            };
-
-            window.performVoidOrder = function() {
-                if (cart.length > 0) {
-                    cart = [];
-                    selectedItemIndex = -1;
-                    allElements.yellowBanner.textContent = "VOID ORDER SUCCESS: All items cleared from session";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                    renderCart();
-                } else {
-                    allElements.yellowBanner.textContent = "VOID ORDER FAIL: Checkout cart is already empty.";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-700 text-white flex items-center justify-center font-semibold text-center px-4";
-                }
-            };
-
-            window.performVoidQuantity = function() {
-                if (cart.length > 0 && selectedItemIndex >= 0 && selectedItemIndex < cart.length) {
-                    const value = parseInt(globalInput, 10);
-                    if (!value || value <= 0) {
-                        allElements.yellowBanner.textContent = "VOID QTY FAIL: Type quantity amount first on keypad/keyboard.";
-                        allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                        return;
-                    }
-                    
-                    const selectedItem = cart[selectedItemIndex];
-                    const itemPluToVoid = selectedItem.plu;
-                    const itemName = selectedItem.name;
-                    
-                    const matches = cart.filter(i => i.plu === itemPluToVoid && i.name === itemName);
-                    const countToRemove = Math.min(value, matches.length);
-                    
-                    let removedCount = 0;
-                    for (let i = cart.length - 1; i >= 0; i--) {
-                        if (cart[i].plu === itemPluToVoid && cart[i].name === itemName && removedCount < countToRemove) {
-                            cart.splice(i, 1);
-                            removedCount++;
-                        }
-                    }
-
-                    selectedItemIndex = cart.length > 0 ? cart.length - 1 : -1;
-
-                    allElements.yellowBanner.textContent = `VOID QTY SUCCESS: Voided ${removedCount} unit(s) of ${itemName.toUpperCase()}`;
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-600 text-black flex items-center justify-center font-semibold text-center px-4";
-                    renderCart();
-                    clearGlobalInput();
-                } else {
-                    allElements.yellowBanner.textContent = "VOID QTY FAIL: Select an item in the checkout list first.";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                }
-            };
-
-            // --- Drag and Drop Logic for Staff Card ---
-            const card = allElements.staffCard;
-            const reader = allElements.cardReader;
-            let isDragging = false;
-            let startX, startY;
-            let translateX = 0;
-            let translateY = 0;
-
-            card.addEventListener('pointerdown', (e) => {
-                if (!isWaitingForManagerCard) {
-                    triggerCardSwipe();
-                    return;
-                }
-                isDragging = true;
-                card.classList.add('dragging');
-                card.classList.remove('returning');
-                startX = e.clientX - translateX;
-                startY = e.clientY - translateY;
-                card.setPointerCapture(e.pointerId);
-            });
-
-            card.addEventListener('pointermove', (e) => {
-                if (!isDragging) return;
-                
-                translateX = e.clientX - startX;
-                translateY = e.clientY - startY;
-                
-                card.style.transform = `scale(0.6) translate(${translateX / 0.6}px, ${translateY / 0.6}px)`;
-                
-                const cardRect = card.getBoundingClientRect();
-                const readerRect = reader.getBoundingClientRect();
-                
-                const overlaps = !(cardRect.right < readerRect.left || 
-                                   cardRect.left > readerRect.right || 
-                                   cardRect.bottom < readerRect.top || 
-                                   cardRect.top > readerRect.bottom);
-                                   
-                if (overlaps) {
-                    allElements.cardReaderSlot.className = "h-2 w-full rounded-full shadow-inner border border-gray-900 reader-glow-green";
-                } else {
-                    allElements.cardReaderSlot.className = "h-2 w-full bg-blue-600 rounded-full shadow-inner border border-gray-900 reader-glow-blue";
-                }
-            });
-
-            card.addEventListener('pointerup', (e) => {
-                if (!isDragging) return;
-                isDragging = false;
-                card.classList.remove('dragging');
-                card.releasePointerCapture(e.pointerId);
-
-                const cardRect = card.getBoundingClientRect();
-                const readerRect = reader.getBoundingClientRect();
-
-                const overlaps = !(cardRect.right < readerRect.left || 
-                                   cardRect.left > readerRect.right || 
-                                   cardRect.bottom < readerRect.top || 
-                                   cardRect.top > readerRect.bottom);
-
-                if (overlaps) {
-                    handleSwipeSuccess();
-                    translateX = 0;
-                    translateY = 0;
-                    card.style.transform = `scale(0.6) translate(0px, 0px)`;
-                } else {
-                    card.classList.add('returning');
-                    translateX = 0;
-                    translateY = 0;
-                    card.style.transform = `scale(0.6) translate(0px, 0px)`;
-                    allElements.cardReaderSlot.className = "h-2 w-full bg-blue-600 rounded-full shadow-inner border border-gray-900 reader-glow-blue";
-                }
-            });
-
-            card.addEventListener('pointercancel', () => {
-                isDragging = false;
-                card.classList.remove('dragging');
-                card.classList.add('returning');
-                translateX = 0;
-                translateY = 0;
-                card.style.transform = `scale(0.6) translate(0px, 0px)`;
-            });
-
-            // --- Firestore Suspend / Resume Integrations ---
-            window.initiateSuspend = async function() {
-                if (cart.length === 0) {
-                    allElements.yellowBanner.textContent = "TRANSACTION EMPTY - CANNOT SUSPEND ORDER";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-                allElements.suspendNameInput.value = '';
-                allElements.suspendModal.classList.add('active');
-                allElements.suspendNameInput.focus();
-            };
-
-            window.cancelSuspend = function() {
-                allElements.suspendModal.classList.remove('active');
-            };
-
-            window.confirmSuspend = async function() {
-                const name = allElements.suspendNameInput.value.trim() || 'Suspended Order';
-                allElements.suspendModal.classList.remove('active');
-                
-                if (!db) {
-                    allElements.yellowBanner.textContent = "LOCAL ERROR: RETRIEVAL SYSTEM UNCONFIGURED";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-500 text-white flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
-
-                try {
-                    allElements.yellowBanner.textContent = "SUSPENDING TRANSACTION TO CLOUD...";
-                    allElements.yellowBanner.className = "h-[8%] bg-blue-600 text-white flex items-center justify-center font-semibold text-center px-4 animate-pulse";
-                    
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'suspended_orders'), {
-                        name: name,
-                        cart: JSON.stringify(cart),
-                        isTaxExempt: isTaxExempt,
-                        timestamp: Date.now()
-                    });
-
-                    cart = [];
-                    isTaxExempt = false;
-                    selectedItemIndex = -1;
-                    renderCart();
-                    showMainButtons();
-
-                    allElements.yellowBanner.textContent = `ORDER SUSPENDED SUCCESSFULLY: "${name.toUpperCase()}"`;
-                    allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                } catch (e) {
-                    console.error("Firestore suspend failed:", e);
-                    allElements.yellowBanner.textContent = "SUSPEND FAILED: SERVER TIMEOUT";
-                    allElements.yellowBanner.className = "h-[8%] bg-red-600 text-white flex items-center justify-center font-semibold text-center px-4";
-                }
-            };
-
             window.initiateResumeList = async function() {
-                if (cart.length > 0) {
-                    allElements.yellowBanner.textContent = "CLEAR ACTIVE TRANSACTION FIRST TO RESUME";
-                    allElements.yellowBanner.className = "h-[8%] bg-yellow-500 text-black flex items-center justify-center font-semibold text-center px-4";
-                    return;
-                }
                 allElements.resumeModal.classList.add('active');
-                allElements.resumeListContainer.innerHTML = '<p class="text-gray-400 italic text-center py-8">Fetching list...</p>';
-
-                if (!db) {
-                    allElements.resumeListContainer.innerHTML = '<p class="text-red-500 text-center py-8">Local Error: Cloud services unconfigured.</p>';
-                    return;
-                }
-
-                try {
-                    const snap = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'suspended_orders'));
-                    const list = [];
-                    snap.forEach(d => {
-                        list.push({ id: d.id, ...d.data() });
-                    });
-
-                    if (list.length === 0) {
-                        allElements.resumeListContainer.innerHTML = '<p class="text-gray-500 italic text-center py-8">No suspended transactions active.</p>';
-                        return;
-                    }
-
-                    allElements.resumeListContainer.innerHTML = list.map(order => {
-                        const timeStr = new Date(order.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        return `
-                            <div onclick="resumeSelectedOrder('${order.id}')" class="flex justify-between items-center p-3 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl cursor-pointer transition-all">
-                                <div class="text-left">
-                                    <p class="font-bold text-gray-800 uppercase text-sm">${order.name}</p>
-                                    <p class="text-xs text-gray-400">${timeStr}</p>
+                allElements.resumeListContainer.innerHTML = '<p class="text-gray-500 italic text-center py-6">Loading suspended sessions...</p>';
+                
+                let html = '';
+                
+                if (db) {
+                    try {
+                        const snap = await getDocs(collection(db, `${appId}_suspended`));
+                        snap.forEach(docSnap => {
+                            const data = docSnap.data();
+                            const totalAmount = data.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+                            html += `
+                                <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-200">
+                                    <div class="text-left">
+                                        <p class="font-bold text-gray-800">${data.customerName}</p>
+                                        <p class="text-xs text-gray-500 font-mono">${data.cart.length} items - Ttl: $${totalAmount.toFixed(2)}</p>
+                                    </div>
+                                    <button onclick="window.confirmResumeDoc('${docSnap.id}', true)" class="bg-blue-600 text-white font-bold text-sm px-4 py-2 rounded-lg">Resume</button>
                                 </div>
-                                <span class="bg-blue-600 text-white text-xs font-bold py-1 px-3 rounded-full uppercase">Load</span>
-                            </div>
-                        `;
-                    }).join('');
-                } catch (e) {
-                    console.error("Firestore retrieval failed:", e);
-                    allElements.resumeListContainer.innerHTML = '<p class="text-red-500 text-center py-8">Error loading suspended list.</p>';
+                            `;
+                        });
+                    } catch (e) {
+                        console.error("Firestore Resume List Error:", e);
+                    }
                 }
+
+                // Append local array logs smoothly
+                localSuspendedList.forEach(localItem => {
+                    const totalAmount = localItem.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+                    html += `
+                        <div class="flex justify-between items-center bg-yellow-50 p-3 rounded-xl border border-yellow-200">
+                            <div class="text-left">
+                                <p class="font-bold text-gray-800">${localItem.customerName} (Local)</p>
+                                <p class="text-xs text-gray-500 font-mono">${localItem.cart.length} items - Ttl: $${totalAmount.toFixed(2)}</p>
+                            </div>
+                            <button onclick="window.confirmResumeDoc('${localItem.id}', false)" class="bg-yellow-600 text-black font-bold text-sm px-4 py-2 rounded-lg">Resume</button>
+                        </div>
+                    `;
+                });
+
+                allElements.resumeListContainer.innerHTML = html || '<p class="text-gray-400 italic text-center py-6">No suspended orders found.</p>';
             };
 
-            window.resumeSelectedOrder = async function(id) {
+            window.cancelResume = function() { 
+                allElements.resumeModal.classList.remove('active'); 
+            };
+
+            window.confirmResumeDoc = async function(id, isCloud) {
                 allElements.resumeModal.classList.remove('active');
-                if (!db) return;
+                if (cart.length > 0) {
+                    if (!confirm("This will overwrite your existing active cart items on screen. Continue?")) return;
+                }
 
-                try {
-                    allElements.yellowBanner.textContent = "LOADING RESUMED SESSION...";
-                    allElements.yellowBanner.className = "h-[8%] bg-blue-600 text-white flex items-center justify-center font-semibold text-center px-4 animate-pulse";
-                    
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'suspended_orders', id);
-                    const snap = await getDoc(docRef);
-
-                    if (snap.exists()) {
-                        const data = snap.data();
-                        cart = JSON.parse(data.cart);
-                        isTaxExempt = !!data.isTaxExempt;
+                if (isCloud && db) {
+                    try {
+                        const docRef = doc(db, `${appId}_suspended`, id);
+                        const snap = await getDoc(docRef);
+                        if (snap.exists()) {
+                            const data = snap.data();
+                            cart = data.cart;
+                            isTaxExempt = data.isTaxExempt || false;
+                            selectedItemIndex = cart.length - 1;
+                            renderCart();
+                            showMainButtons();
+                            await deleteDoc(docRef);
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                } else {
+                    const idx = localSuspendedList.findIndex(i => i.id === id);
+                    if (idx >= 0) {
+                        cart = localSuspendedList[idx].cart;
+                        isTaxExempt = localSuspendedList[idx].isTaxExempt || false;
                         selectedItemIndex = cart.length - 1;
-
-                        // Delete to avoid duplicate loads
-                        await deleteDoc(docRef);
-
+                        localSuspendedList.splice(idx, 1);
                         renderCart();
                         showMainButtons();
-                        allElements.yellowBanner.textContent = `ORDER RESUMED: "${data.name.toUpperCase()}"`;
-                        allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
                     }
-                } catch (e) {
-                    console.error(e);
                 }
             };
 
-            window.cancelResume = function() {
-                allElements.resumeModal.classList.remove('active');
+            // --- Tax Exempt Flow ---
+            window.triggerTaxExemptFlow = function() {
+                allElements.taxExemptIdInput.value = '';
+                allElements.taxExemptError.textContent = '';
+                allElements.taxExemptModal.classList.add('active');
+                allElements.taxExemptIdInput.focus();
             };
-
-            // --- Event Listeners ---
-            allElements.loginButton.addEventListener('click', attemptLogin);
-            allElements.passwordInput.addEventListener('keyup', e => e.key === 'Enter' && attemptLogin());
-            allElements.userIdInput.addEventListener('keyup', e => e.key === 'Enter' && allElements.passwordInput.focus());
-
-            // Manager Override buttons
-            allElements.managerLoginBtn.addEventListener('click', attemptManagerLogin);
-            allElements.managerPasswordInput.addEventListener('keyup', e => e.key === 'Enter' && attemptManagerLogin());
-
-            // Global Keyboard Listener for Number Input
-            window.addEventListener('keydown', e => {
-                // Only listen for keys if logged in and not typing in any login field
-                if (!isLoggedIn || 
-                    document.activeElement === allElements.userIdInput || 
-                    document.activeElement === allElements.passwordInput ||
-                    document.activeElement === allElements.managerIdInput ||
-                    document.activeElement === allElements.managerPasswordInput ||
-                    document.activeElement === allElements.suspendNameInput ||
-                    document.activeElement === allElements.taxExemptIdInput) {
+            window.cancelTaxExempt = function() { allElements.taxExemptModal.classList.remove('active'); };
+            window.confirmTaxExempt = function() {
+                const idVal = allElements.taxExemptIdInput.value.trim();
+                if (idVal.length < 5) {
+                    allElements.taxExemptError.textContent = "Tax ID must be 5 characters or longer.";
                     return;
                 }
+                isTaxExempt = true;
+                allElements.taxExemptModal.classList.remove('active');
+                renderCart();
+                allElements.yellowBanner.textContent = `TAX EXEMPT STATUS STATUS LOCKED IN (ID: ${idVal})`;
+                allElements.yellowBanner.className = "h-[8%] bg-purple-600 text-white flex items-center justify-center font-semibold text-center px-4";
+            };
 
-                if (e.key >= '0' && e.key <= '9') {
-                    handleNumberInput(e.key);
-                } else if (e.key === 'Backspace') {
-                    handleNumberInput('B');
+            window.triggerManualEntryFlow = function() { alert("Manual PLU entry activated. Enter code via peripheral keys."); };
+            window.triggerEbtFlow = function() { alert("EBT card manual account verification active."); };
+
+            // --- Running Digital Clock ---
+            function updateDateTime() {
+                const now = new Date();
+                
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const year = now.getFullYear();
+                
+                let hours = now.getHours();
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                
+                hours = hours % 12;
+                hours = hours ? hours : 12; 
+                const finalHours = String(hours).padStart(2, '0');
+
+                if (allElements.clockDisplay) {
+                    allElements.clockDisplay.textContent = `${month}/${day}/${year} ${finalHours}:${minutes}:${seconds} ${ampm}`;
                 }
-            });
+            }
 
-            // On-screen right keypad input
-            allElements.rightKeypadGrid.addEventListener('click', e => {
-                const btn = e.target.closest('.payment-keypad-btn');
-                if (btn && isLoggedIn) {
-                    const key = btn.dataset.key;
-                    handleNumberInput(key);
-                }
-            });
-
-            // Main Button Listeners
+            // --- Click Events ---
+            allElements.loginButton.addEventListener('click', attemptLogin);
             allElements.btnSignOut.addEventListener('click', () => allElements.signOutModal.classList.add('active'));
             allElements.btnTransMenu.addEventListener('click', () => showActionPanel(allElements.transMenuPanel));
             allElements.btnSupvMenu.addEventListener('click', () => showActionPanel(allElements.supvMenuPanel));
             allElements.btnCouponMenu.addEventListener('click', () => showActionPanel(allElements.couponMenuPanel));
-            
+            allElements.btnPaymentMenu.addEventListener('click', () => showActionPanel(allElements.paymentMenuPanel));
             allElements.btnPluLookup.addEventListener('click', () => {
                 showActionPanel(allElements.pluLookupPanel);
                 switchToView('catalog');
@@ -1613,35 +1257,43 @@
                 showVoidAuthorization();
             });
 
-            // Sign Out Modal Listeners
             allElements.cancelSignOutButton.addEventListener('click', () => allElements.signOutModal.classList.remove('active'));
             allElements.confirmSignOutButton.addEventListener('click', () => {
                 allElements.signOutModal.classList.remove('active');
                 showLoginScreen();
             });
+            
             allElements.noSaleButton.addEventListener('click', () => {
                 allElements.signOutModal.classList.remove('active');
-                alert('Cash Drawer Open');
+                
+                if (allElements.footerDrawerStatus) {
+                    allElements.footerDrawerStatus.textContent = "OPEN";
+                    allElements.footerDrawerStatus.classList.remove('text-red-500');
+                    allElements.footerDrawerStatus.classList.add('text-green-500');
+                    
+                    setTimeout(() => {
+                        allElements.footerDrawerStatus.textContent = "CLOSED";
+                        allElements.footerDrawerStatus.classList.remove('text-green-500');
+                        allElements.footerDrawerStatus.classList.add('text-red-500');
+                    }, 5000);
+                }
             });
 
-            // System search (PLU search button click action)
             window.performPLUSD = function() {
                 if (globalInput) {
                     addCatalogItemToCart(globalInput);
                     clearGlobalInput();
                 } else {
-                    alert('Please enter a PLU code on the keypad or keyboard to search.');
+                    alert('Please type a PLU item identifier on the input keypad to process.');
                 }
             };
 
-            // --- Initial Setup ---
-            window.showMainButtons = showMainButtons; // Make globally accessible from HTML
+            // --- Startup Routine ---
+            window.showMainButtons = showMainButtons;
             updateDateTime();
-            updateBannerStatus();
             setInterval(updateDateTime, 1000);
             setTimeout(showLoginScreen, 100);
         });
     </script>
-
 </body>
 </html>
