@@ -162,7 +162,8 @@
 
     <main class="w-4/5 bg-gray-900 text-white h-full flex flex-col relative">
         
-        <div class="flex-grow flex pb-10"> <div class="w-[70%] h-full flex flex-col relative border-r border-gray-800">
+        <div class="flex-grow flex h-[calc(100%-2.5rem)]"> 
+            <div class="w-[70%] h-full flex flex-col relative border-r border-gray-800">
                  <div id="main-content-dimmer" class="login-ui-element absolute inset-0 bg-black bg-opacity-60 z-10"></div>
                  
                  <div class="h-full flex flex-col overflow-hidden">
@@ -296,15 +297,11 @@
             </div>
         </div>
 
-        <footer class="fixed bottom-0 left-0 right-0 bg-[#A0A0A0] border-t-4 border-white text-black font-mono text-sm px-5 py-2 select-none flex justify-between items-center z-40">
+        <footer class="h-10 w-full bg-black text-white border-t border-gray-800 font-mono text-sm px-4 select-none flex justify-between items-center z-40">
             <div class="flex items-center gap-6">
                 <div>CASHIER: <span id="footerCashierNum">0001</span></div>
-                <div class="border-l-2 border-gray-600 pl-4">
-                    DRAWER: <span id="footerDrawerStatus" class="font-bold text-red-700">CLOSED</span>
-                </div>
-                <div class="border-l-2 border-gray-600 pl-4">
-                    PREV TTL: $<span id="footerPrevTotal" class="font-bold">0.00</span>
-                </div>
+                <div>DRAWER: <span id="footerDrawerStatus" class="font-bold text-red-500">CLOSED</span></div>
+                <div>PREV TOTAL: $<span id="footerPrevTotal" class="font-bold">0.00</span></div>
             </div>
             
             <div class="flex items-center gap-6">
@@ -469,23 +466,23 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             // --- Credentials & State ---
-            const ADMIN_USER_ID = '0910336'; // Cashier ID
-            const ADMIN_PASSWORD = '091'; // Cashier Password
-            const ADMIN_NAME = 'Nathaniel F'; // Cashier Name
+            const ADMIN_USER_ID = '0910336'; 
+            const ADMIN_PASSWORD = '091'; 
+            const ADMIN_NAME = 'Nathaniel F'; 
 
-            const MANAGER_USER_ID = '0910800'; // Otter ID
-            const MANAGER_PASSWORD = 'otter800'; // Otter Password
+            const MANAGER_USER_ID = '0910800'; 
+            const MANAGER_PASSWORD = 'otter800'; 
 
             let cart = [];
             let globalInput = '';
             let isLoggedIn = false;
-            let currentView = 'checkout'; // checkout or catalog
+            let currentView = 'checkout'; 
             let isWaitingForManagerCard = false;
-            let selectedItemIndex = -1; // Index of the currently selected checkout item
+            let selectedItemIndex = -1; 
             let isTaxExempt = false;
             let currentPaymentTimer = null;
-            let pendingVerifCallback = null; // Holds onSuccess action for staff verif flow
-            let savedPrevTotal = 0.00; // Persistent variable tracking final total of prior checkout
+            let pendingVerifCallback = null; 
+            let savedPrevTotal = 0.00; 
 
             // --- PLU Catalog Data ---
             const pluCatalog = [
@@ -692,7 +689,6 @@
                 allElements.itemListArea.innerHTML = catalogGridHtml;
             }
 
-            // Add Catalog Item to transaction
             window.addCatalogItemToCart = function(pluCode) {
                 const item = pluCatalog.find(i => i.plu === pluCode);
                 if (item) {
@@ -725,7 +721,7 @@
                 allElements.yellowBanner.className = "h-[8%] bg-green-600 text-white flex items-center justify-center font-semibold text-center px-4";
             };
 
-            // --- Cart / Basket Calculations & Render ---
+            // --- Calculations & Render ---
             function calculateTotals() {
                 let subtotal = 0;
                 cart.forEach(item => {
@@ -769,7 +765,6 @@
                     </div>
                 `;
                 
-                // Auto scroll list down
                 allElements.itemListArea.scrollTop = allElements.itemListArea.scrollHeight;
             }
 
@@ -778,7 +773,7 @@
                 renderCart();
             };
 
-            // --- Payment Logic Systems ---
+            // --- Payment System Blocks ---
             window.processCashPayment = function() {
                 const totals = calculateTotals();
                 if (totals.total <= 0) {
@@ -786,7 +781,6 @@
                     return;
                 }
                 
-                // Track previous transaction total before clearing
                 savedPrevTotal = totals.total;
                 if (allElements.footerPrevTotal) {
                     allElements.footerPrevTotal.textContent = savedPrevTotal.toFixed(2);
@@ -794,15 +788,14 @@
 
                 alert(`Transaction Cashed Out!\nTotal: $${totals.total.toFixed(2)}\nOpening drawer!`);
                 
-                // Simulate cash drawer opening on payment cash out
                 if (allElements.footerDrawerStatus) {
                     allElements.footerDrawerStatus.textContent = "OPEN";
-                    allElements.footerDrawerStatus.classList.remove('text-red-700');
-                    allElements.footerDrawerStatus.classList.add('text-green-700');
+                    allElements.footerDrawerStatus.classList.remove('text-red-500');
+                    allElements.footerDrawerStatus.classList.add('text-green-500');
                     setTimeout(() => {
                         allElements.footerDrawerStatus.textContent = "CLOSED";
-                        allElements.footerDrawerStatus.classList.remove('text-green-700');
-                        allElements.footerDrawerStatus.classList.add('text-red-700');
+                        allElements.footerDrawerStatus.classList.remove('text-green-500');
+                        allElements.footerDrawerStatus.classList.add('text-red-500');
                     }, 4000);
                 }
 
@@ -834,7 +827,6 @@
                         allElements.paymentTerminalMsg.textContent = "APPROVED! REMOVE";
                         allElements.cardReaderSlot.className = "h-2 w-full bg-green-500 reader-glow-green rounded-full border border-green-400";
                         
-                        // Save previous total
                         savedPrevTotal = totals.total;
                         if (allElements.footerPrevTotal) allElements.footerPrevTotal.textContent = savedPrevTotal.toFixed(2);
 
@@ -870,7 +862,7 @@
                 allElements.cardReaderSlot.className = "h-2 w-full bg-black rounded-full shadow-inner border border-gray-900";
             };
 
-            // --- Keypad Logic Operations ---
+            // --- Keypad Mechanics ---
             function handleKeypadStroke(key) {
                 if (!isLoggedIn && key !== 'C') return;
 
@@ -891,13 +883,12 @@
                 }
             }
 
-            // Keyboard Hook setup
             document.addEventListener('keydown', (e) => {
                 if (!isLoggedIn) {
                     if (e.key === 'Enter') attemptLogin();
                     return;
                 }
-                if (e.target.tagName === 'INPUT') return; // Prevent trapping inside modals
+                if (e.target.tagName === 'INPUT') return; 
 
                 if (e.key >= '0' && e.key <= '9') {
                     handleKeypadStroke(e.key);
@@ -912,7 +903,6 @@
                 }
             });
 
-            // Handle Click listener on Right side keypad
             allElements.rightKeypadGrid.querySelectorAll('button').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const key = btn.getAttribute('data-key');
@@ -920,7 +910,7 @@
                 });
             });
 
-            // --- Supervisor Authorization Verification Workflow ---
+            // --- Supervisor Authentication Workflow ---
             window.showVoidAuthorization = function(successCallback) {
                 if (cart.length === 0) {
                     alert("There are no transaction items present to void.");
@@ -942,7 +932,6 @@
                 pendingVerifCallback = null;
             };
 
-            // Setup Draggable Staff Card Trigger mechanics
             let isDraggingCard = false;
             let dragStartX = 0, dragStartY = 0;
             let cardTransformX = 0, cardTransformY = 0;
@@ -960,14 +949,11 @@
                 if (!isDraggingCard) return;
                 const deltaX = e.clientX - dragStartX;
                 const deltaY = e.clientY - dragStartY;
-                
-                // Calculate custom position transforms
                 const currentX = cardTransformX + deltaX;
                 const currentY = cardTransformY + deltaY;
                 
                 allElements.staffCard.style.transform = `scale(0.6) translate(${currentX}px, ${currentY}px)`;
                 
-                // Detect overlap boundary colliding with staff card reader
                 if (isWaitingForManagerCard) {
                     const readerRect = allElements.cardReader.getBoundingClientRect();
                     const cardRect = allElements.staffCard.getBoundingClientRect();
@@ -978,7 +964,6 @@
                         cardRect.top < readerRect.bottom &&
                         cardRect.bottom > readerRect.top
                     ) {
-                        // End drag loop
                         isDraggingCard = false;
                         allElements.staffCard.releasePointerCapture(e.pointerId);
                         resetStaffCardPos();
@@ -1023,7 +1008,7 @@
                 }
             });
 
-            // --- Void Menu Implementations ---
+            // --- Void Actions ---
             window.performVoidItem = function() {
                 if (selectedItemIndex >= 0 && selectedItemIndex < cart.length) {
                     const item = cart[selectedItemIndex];
@@ -1059,7 +1044,6 @@
                 }
                 const item = cart[selectedItemIndex];
                 if (amt >= item.quantity) {
-                    // Just purge the line item entirely
                     cart.splice(selectedItemIndex, 1);
                 } else {
                     item.quantity -= amt;
@@ -1161,7 +1145,6 @@
                         console.error("Firestore Resume List Error:", e);
                     }
                 } else {
-                    // Local fallback loop render
                     if (localSuspendedList.length === 0) {
                         allElements.resumeListContainer.innerHTML = '<p class="text-gray-400 italic text-center py-6">No suspended orders found.</p>';
                         return;
@@ -1240,15 +1223,13 @@
                 allElements.yellowBanner.className = "h-[8%] bg-purple-600 text-white flex items-center justify-center font-semibold text-center px-4";
             };
 
-            // Placeholder stubs for Department, Manual or EBT flows
             window.triggerManualEntryFlow = function() { alert("Manual PLU entry activated. Enter code via peripheral keys."); };
             window.triggerEbtFlow = function() { alert("EBT card manual account verification active."); };
 
-            // --- Running Live Bottom Clock Layout update ---
+            // --- Running Digital Clock ---
             function updateDateTime() {
                 const now = new Date();
                 
-                // Formatted string to match requested layout: MM/DD/YYYY HH:MM:SS AM/PM
                 const month = String(now.getMonth() + 1).padStart(2, '0');
                 const day = String(now.getDate()).padStart(2, '0');
                 const year = now.getFullYear();
@@ -1259,7 +1240,7 @@
                 const ampm = hours >= 12 ? 'PM' : 'AM';
                 
                 hours = hours % 12;
-                hours = hours ? hours : 12; // Handle midnight condition block
+                hours = hours ? hours : 12; 
                 const finalHours = String(hours).padStart(2, '0');
 
                 if (allElements.clockDisplay) {
@@ -1267,7 +1248,7 @@
                 }
             }
 
-            // --- Connect Navigation Menu Buttons Click Actions ---
+            // --- Click Events ---
             allElements.loginButton.addEventListener('click', attemptLogin);
             allElements.btnSignOut.addEventListener('click', () => allElements.signOutModal.classList.add('active'));
             allElements.btnTransMenu.addEventListener('click', () => showActionPanel(allElements.transMenuPanel));
@@ -1282,32 +1263,28 @@
                 showVoidAuthorization();
             });
 
-            // Sign Out Modal Sub-actions listener handlers
             allElements.cancelSignOutButton.addEventListener('click', () => allElements.signOutModal.classList.remove('active'));
             allElements.confirmSignOutButton.addEventListener('click', () => {
                 allElements.signOutModal.classList.remove('active');
                 showLoginScreen();
             });
             
-            // "No Sale" Action: triggers live status change of the drawer to open state
             allElements.noSaleButton.addEventListener('click', () => {
                 allElements.signOutModal.classList.remove('active');
                 
                 if (allElements.footerDrawerStatus) {
                     allElements.footerDrawerStatus.textContent = "OPEN";
-                    allElements.footerDrawerStatus.classList.remove('text-red-700');
-                    allElements.footerDrawerStatus.classList.add('text-green-700');
+                    allElements.footerDrawerStatus.classList.remove('text-red-500');
+                    allElements.footerDrawerStatus.classList.add('text-green-500');
                     
-                    // Automatically shut drawer flag down after 5 seconds
                     setTimeout(() => {
                         allElements.footerDrawerStatus.textContent = "CLOSED";
-                        allElements.footerDrawerStatus.classList.remove('text-green-700');
-                        allElements.footerDrawerStatus.classList.add('text-red-700');
+                        allElements.footerDrawerStatus.classList.remove('text-green-500');
+                        allElements.footerDrawerStatus.classList.add('text-red-500');
                     }, 5000);
                 }
             });
 
-            // PLU code entry lookup submit button trigger
             window.performPLUSD = function() {
                 if (globalInput) {
                     addCatalogItemToCart(globalInput);
@@ -1317,7 +1294,7 @@
                 }
             };
 
-            // --- System Start Routine ---
+            // --- Startup Routine ---
             window.showMainButtons = showMainButtons;
             updateDateTime();
             setInterval(updateDateTime, 1000);
